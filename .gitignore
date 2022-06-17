@@ -1,0 +1,9 @@
+.DS_Store
+
+apps/__pycache__/context_processors.cpython-39.pyc
+
+core/__pycache__/wsgi.cpython-39.pyc
+
+core/__pycache__/*
+
+app/__pycache__/*
