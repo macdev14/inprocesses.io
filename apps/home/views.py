@@ -9,6 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
+from twilio.rest import Client
+from core.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 
 @login_required(login_url="/login/")
 def index(request):
