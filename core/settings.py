@@ -10,6 +10,8 @@ env = environ.Env(
     DEBUG=(bool, True)
 )
 
+AUTH_USER_MODEL = 'authentication.User'
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,8 +29,16 @@ DEBUG = env('DEBUG')
 ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
 
 # load production server from .env
-ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1', 'timesavr.herokuapp.com',              env('SERVER', default='127.0.0.1') ]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1','https://timesavr.herokuapp.com', 'https://' + env('SERVER', default='127.0.0.1') ]
+ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1', 'timesavr.herokuapp.com', 'inprocesses.io','inprocesses.com','inprocesses.com.br',             env('SERVER', default='127.0.0.1') ]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1','https://timesavr.herokuapp.com','https://inprocesses.io', 'https://inprocesses.com', 'https://inprocesses.com.br', 'https://' + env('SERVER', default='127.0.0.1') ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Application definition
 
@@ -37,9 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'simple_history',
+    'qrcode',
+    'localflavor',
+    'apps.authentication',
+    'apps.serviceordercontrol',
     'apps.home'  # Enable the inner home (home)
+    
 ]
 
 MIDDLEWARE = [
@@ -139,6 +157,7 @@ STATICFILES_DIRS = (
 )
 
 
+
 #############################################################
 #############################################################
 # Twilio 
@@ -146,3 +165,20 @@ STATICFILES_DIRS = (
 TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID')
 
 TWILIO_AUTH_TOKEN=env('TWILIO_AUTH_TOKEN')
+
+USE_AWS = False
+
+if USE_AWS:
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    AWS_URL = env('AWS_URL')
+    AWS_S3_REGION_NAME = 'sa-east-1'
+
+    STATIC_ROOT = AWS_URL + '/static/'
+    STATIC_URL = AWS_URL + '/static/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = AWS_URL + '/media/'
+    MEDIA_ROOT = AWS_URL + '/media/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

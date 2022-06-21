@@ -1,5 +1,5 @@
 {% extends "layouts/base-fullscreen.html" %}
-
+{% load widget_tweaks %}
 {% block title %} Reset Pass {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
@@ -21,16 +21,26 @@
                     <i class="feather icon-mail auth-icon"></i>
                 </div>
                 <h3 class="mb-4">Reset Password</h3>
+                <form role="form" method="post" action="">
+
+                    {% csrf_token %}   
+
+                {% for field in form.visible_fields %}
+
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Senha">
+
+                    {% render_field field class="form-control" placeholder=field.label %}
                    
                 </div>
-                <div class="input-group mb-3">
-                   
-                    <input type="password" class="form-control" placeholder="Confirmar Senha">
-                </div>
+                    {% for error in field.errors %}
+                    <span class="text-error" >{{ error }}</span>
+                    {% endfor %}
+                {% endfor %}
+
+                
                 <button class="btn btn-primary mb-4 shadow-2">Alterar Senha</button>
                 <!-- <p class="mb-0 text-muted">Don’t have an account? <a href="/register.html" >Signup</a></p> -->
+            </form>
             </div>
         </div>
     </div>

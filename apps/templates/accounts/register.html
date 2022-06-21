@@ -1,5 +1,6 @@
 {% extends "layouts/base-fullscreen.html" %}
-
+{% load widget_tweaks %}
+{% load static %}
 {% block title %} Login {% endblock %}
 
 {% block content %}   
@@ -17,13 +18,13 @@
                     <div class="mb-4">
                         <i class="feather icon-user-plus auth-icon"></i>
                     </div>
-                    <h3 class="mb-4">Sign up</h3>
+                    <h3 class="mb-4">Cadastre seu {{ user_type.capitalize }}</h3>
 
                     <span class="mb-0 text-muted">
                         {% if msg %}
                             <span class="text-danger">{{ msg | safe }}</span>
                         {% else %}
-                            Add your credentials
+                            Digite seus dados
                         {% endif %} 
                     </span>
 
@@ -41,7 +42,7 @@
 
                             {% csrf_token %}                    
 
-                            <div class="input-group mb-3">
+                            <!-- <div class="input-group mb-3">
                                 {{ form.username }}
                             </div>
                             <span class="text-error">{{ form.username.errors }}</span>
@@ -60,29 +61,75 @@
                                 {{ form.password2 }}
                             </div>
                             <span class="text-error">{{ form.password2.errors }}</span>
-                            
+                             -->
+
+                        {% for field in form.visible_fields %}
+
+                        <div class="input-group mb-4">
+                         
+                          {% render_field field class="form-control" placeholder=field.label %}
+                        </div>
+                            {% for error in field.errors %}
+                                <span class="text-error" >{{ error }}</span>
+                            {% endfor %}
+                          
+                       
+                        {% endfor %}
+
+
+
                             <div class="form-group text-left">
                                 <div class="checkbox checkbox-fill d-inline">
                                     <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
-                                    <label for="checkbox-fill-a1" class="cr"> Agree with <a href="#">terms</a></label>
+                                    <label for="checkbox-fill-a1" class="cr"> Aceitar nossos <a href="#">termos</a></label>
                                 </div>
                             </div>
-                            <button type="submit" name="register" class="btn btn-primary shadow-2 mb-4">Register</button>
+                            <button type="submit" name="register" class="btn btn-primary shadow-2 mb-4">Cadastre-se</button>
 
                         </form>
 
-                        <p class="mb-0 text-muted">Already have an account? <a href="{% url 'login' %}" >Login</a></p>
+                        <p class="mb-0 text-muted">Já possui conta? <a href="{% url 'login' %}" >Login</a></p>
                     
                     {% endif %}
                     
                     <br />
                     <p class="mb-2 text-muted">
-                        &copy; <a target="_blank" href="https://bit.ly/37fF9RT">CodedThemes</a> 
-                        - <a target="_blank" href="https://appseed.us/admin-dashboards/django-datta-able">Django Datta Able</a>
+                        &copy; <a target="_blank" href="">InProcesses</a> 
+                        - <a target="_blank" href="">LauroMTP</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function cnpjlog(e) {
+             console.log(cnpjValidation(e.value))
+             //console.log(type)
+            if (!cnpjValidation(e.value)){
+
+                $.notify({
+		icon: "pe-7s-close-circle",
+		message: "CNPJ Inválido"
+
+	},{
+		type: type[4],
+		timer: 4000,
+		placement: {
+			from: 'top',
+			align: 'right'
+		}
+	})
+
+            }    
+   ;
+        }
+       
+     
+     
+     </script>
 
 {% endblock content %}
+
+{% block javascripts %}
+<script src="{% static 'assets/js/cnpj.validation.js' %}" type="text/javascript"></script>å
+{% endblock javascripts %}

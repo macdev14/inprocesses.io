@@ -23,7 +23,7 @@
                         {% if msg %}
                             <span class="text-danger">{{ msg | safe }}</span>
                         {% else %}
-                            Add your credentials
+                            Entre com seus dados
                         {% endif %} 
                     </span>
 
@@ -52,11 +52,13 @@
 
                     </form>
 
-                    <p class="mb-0 text-muted">Don’t have an account? <a href="{% url 'register' %}" >Sign UP</a></p>
+                    <p class="mb-0 text-muted">Não possui conta? <a href="{% url 'register' %}" >Cadastre-se</a></p>
+                 
+                    <p class="mb-0 text-muted">Esqueceu sua senha? <a href="{% url 'password_reset' %}">Altere sua senha </a></p>
                     <br />
                     <p class="mb-2 text-muted">
-                        &copy; <a target="_blank" href="https://bit.ly/37fF9RT">CodedThemes</a> 
-                        - <a target="_blank" href="https://appseed.us/admin-dashboards/django-datta-able">Django Datta Able</a>.
+                        &copy; <a target="_blank" href="">InProcesses</a> 
+                        - <a target="_blank" href="https://lauromtp.com">LauroMTP</a>.
                     </p>
                 </div>
             </div>
