@@ -7,3 +7,5 @@ core/__pycache__/wsgi.cpython-39.pyc
 core/__pycache__/*
 
 app/__pycache__/*
+
+.env
