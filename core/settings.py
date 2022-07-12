@@ -55,7 +55,12 @@ INSTALLED_APPS = [
     'qrcode',
     'localflavor',
     'apps.authentication',
-    'apps.serviceordercontrol',
+    'apps.serviceorder',
+    'apps.subserviceorder',
+    'apps.process',
+    'apps.employee',
+    'apps.client',
+    'apps.inprocesses',
     'apps.home'  # Enable the inner home (home)
     
 ]
@@ -132,7 +137,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'pt-br'
-
+LOGIN_REDIRECT_URL = '/login'
+LOGOUT_REDIRECT_URL = '/login'
 LOCALE_NAME = 'pt_BR'
 
 TIME_ZONE = 'America/Sao_Paulo'

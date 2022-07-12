@@ -6,6 +6,6 @@ Copyright (c) 2019 - present AppSeed.us
 from django.apps import AppConfig
 
 
-class AuthConfig(AppConfig):
-    name = 'app.serviceordercontrol'
-    label = 'apps_serviceordercontrol'
+class MyConfig(AppConfig):
+    name = 'apps.inprocesses'
+    label = 'apps_inprocesses'

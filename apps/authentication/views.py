@@ -10,7 +10,7 @@ from requests import request
 from .forms import *
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.views.generic import CreateView
-from .permissions import CreateEmployeePermission
+from .permissions import CreateEmployeePermission, CreateCompanyPermission
 from core.settings import EMAIL_HOST_USER
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
@@ -20,7 +20,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
-
+from django.contrib import messages 
 def check_admin(user):
     return user.is_superuser
 
@@ -137,7 +137,7 @@ def password_reset_request(request):
 #     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
 
-class CompanySignUpView(CreateView):
+class CompanySignUpView(CreateCompanyPermission, CreateView):
     model = User
     form_class = CompanySignUpForm
     template_name = 'accounts/register.html'
@@ -163,31 +163,39 @@ class CompanySignUpView(CreateView):
 class EmployeeSignUpView(CreateEmployeePermission, CreateView):
     model = User
     form_class = EmployeeSignUpForm
-    template_name = "accounts/register.html"
+    template_name = "employees/add-employee.html"
     #fields = '__all__'
     msg = None
     success = False
 
     def get_form_kwargs(self, **kwargs):
         form_kwargs = super(EmployeeSignUpView, self).get_form_kwargs(**kwargs)
-        form_kwargs["user"] = self.request.user
+        #form_kwargs["user"] = self.request.user
+        usr = Company.objects.get(user=self.request.user)
+        form_kwargs["company"] = usr
         return form_kwargs
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'colaborador'
         kwargs['msg'] = self.msg
         kwargs['success'] = self.success
+        kwargs['user'] = self.request.user
+        
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        if self.request.user.is_company or self.request.user.is_superuser:
-            form.company = self.request.user
-            user = form.save(user=self.request.user)
+        if self.request.user.is_company:
+            usr = Company.objects.get(user=self.request.user)
+            form.company = usr
+            user = form.save()
             self.msg = 'Employee created successfully.'
+            messages.success(self.request,'Colaborador cadastrado com Sucesso.')
             self.success = True
             login(self.request, user)
-            return redirect('admin:index')
+            return redirect('home:home')
         else:
             self.msg = 'Please register company before registering employee.'
             self.success = False
-            raise forms.ValidationError("Não é uma empresa")
+            messages.error(self.request,'Cadastre uma empresa antes de cadastrar um colaborador.')
+            # raise forms.ValidationError("Não é uma empresa")
+            return redirect('authentication:register')

@@ -1,71 +1,15 @@
-#from django.db import models
-
-# Create your models here.
-
-
-
-# Create your models here.
-
-# -*- encoding: utf-8 -*-
-
 from django.db import models
 from django.urls import reverse
-from apps.authentication.models import *
-from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
-from localflavor.br.models import BRCPFField, BRCNPJField, BRPostalCodeField, BRStateField
+from ..authentication.models import Employee
+from ..process.models import Process
 from simple_history.models import HistoricalRecords
 from django.utils.timezone import now
-import datetime as datetime2
+from ..subserviceorder.models import SubServiceOrder
 from django.core.mail import send_mail
-
-class ServiceOrder(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    #sub_os = models.ManyToOneRel(to=SubServiceOrder,on_delete=models.DO_NOTHING)
-    number =  models.IntegerField()
-
-    def __str__(self):
-        return self.number
-
-    def save(self, *args, **kwargs):
-        if self._state.adding:
-            # Get the maximum display_id value from the database
-            last_number = self.objects.all().aggregate(largest=models.Max('number'))['largest']
-
-            # aggregate can return None! Check it first.
-            # If it isn't none, just use the last ID specified (which should be the greatest) and add one to it
-            if last_number is not None:
-                self.number = last_number + 1
-
-        super(ServiceOrder, self).save(*args, **kwargs)
-
-
-class Client(models.Model):
-    name = models.CharField(verbose_name="Nome", max_length=512, blank=True)
-    company_id = BRCNPJField(verbose_name="CNPJ", max_length=512, blank=True)
-    
-
-class SubServiceOrder(models.Model):
-    main_os = models.ForeignKey(ServiceOrder, on_delete=models.CASCADE)
-    number = models.IntegerField()
-    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
-    def save(self, *args, **kwargs):
-        if self._state.adding:
-            # Get the maximum display_id value from the database
-            last_number = self.objects.all().aggregate(largest=models.Max('number'))['largest']
-
-            # aggregate can return None! Check it first.
-            # If it isn't none, just use the last ID specified (which should be the greatest) and add one to it
-            if last_number is not None:
-                self.number = last_number + 1
-        super(SubServiceOrder, self).save(*args, **kwargs)
-
-class Process(models.Model):
-    name = models.CharField(verbose_name="Nome", max_length=512, blank=True)
-
-
+import datetime as datetime2
+from django.utils.translation import gettext_lazy as _
+# Create your models here.
 class ServiceOrderHistory(models.Model):
-    
     
     process = models.ForeignKey(Process, null=True, verbose_name=_("Processo"), on_delete=models.SET_NULL,  related_name="idProcess")
     os = models.ForeignKey(SubServiceOrder, null=True, verbose_name=_("Ordem de Serviço"), on_delete=models.SET_NULL, related_name="idServiceOrder")

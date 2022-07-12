@@ -14,12 +14,28 @@
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar">
                     <li class="nav-item pcoded-menu-caption">
-                        <label>Navigation</label>
+                        <label>Navegação</label>
                     </li>
+                    {{segment}}
+                    {% if user.is_company or user.is_superuser %}
                     <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" 
                         class="nav-item {% if 'index' in segment %} active {% endif %}">
-                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Principal</span></a>
                     </li>
+                  
+                    <li data-username="Employees" 
+                        class="nav-item {% if 'employees' in segment %} active {% endif %}">
+                        <a href="{%url 'employee:list-employees' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Colaboradores</span></a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if user.is_employee or user.is_superuser %}
+                    <li data-username="Employee dashboard" 
+                        class="nav-item {% if 'employee-dashboard' in segment %} active {% endif %}">
+                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Principal</span></a>
+                    </li>
+                    {% endif %}
+
                     <li class="nav-item pcoded-menu-caption">
                         <label>UI Element</label>
                     </li>
@@ -35,9 +51,9 @@
                             <li class=""><a href="/ui-icons.html" class="">Feather<span class="pcoded-badge label label-danger">NEW</span></a></li>
                         </ul>
                     </li>
-                    <li class="nav-item pcoded-menu-caption">
+                    <!-- <li class="nav-item pcoded-menu-caption">
                         <label>Forms & table</label>
-                    </li>
+                    </li> -->
                     <li data-username="form elements advance componant validation masking wizard picker select" 
                         class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
                         <a href="/ui-forms.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Form elements</span></a>
@@ -46,7 +62,7 @@
                         class="nav-item {% if 'ui-tables' in segment %} active {% endif %}">
                         <a href="/ui-tables.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Table</span></a>
                     </li>
-                    <li class="nav-item pcoded-menu-caption">
+                    <!-- <li class="nav-item pcoded-menu-caption">
                         <label>Chart & Maps</label>
                     </li>
                     <li data-username="Charts Morris" 
@@ -57,44 +73,44 @@
                         <a href="/maps-google.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a></li>
                     <li class="nav-item pcoded-menu-caption">
                         <label>Pages</label>
-                    </li>
-                    <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                    </li> -->
+                    <!-- <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
                         <ul class="pcoded-submenu">
                             <li class=""><a href="accounts/reset/auth-reset-pass.html" class="">Reset Pass</a></li>
                             <li class=""><a href="/login.html" class="">Login (template)</a></li>
                             <li class=""><a href="/register.html" class="">Register (template)</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li data-username="Sample Page" 
                         class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
                         <a href="/page-blank.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
                     <li data-username="Sample Page" class="nav-item"><a href="/page-404.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Error 404</span></a></li>
 
                     <li data-username="Disabled Menu" class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link">
+                        <a href="{% url 'authentication:logout' %}" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Logout</span>
                         </a>
                     </li>
-                    <li class="nav-item pcoded-menu-caption">
+                    <!-- <li class="nav-item pcoded-menu-caption">
                         <label>More Resources</label>
-                    </li>                    
-                    <li data-username="Support Page" class="nav-item ">
+                    </li>                     -->
+                    <!-- <li data-username="Support Page" class="nav-item ">
                         <a target="_blank" href="https://appseed.us/support" class="nav-link">
                             <span class="pcoded-micon">
                                 <i class="feather icon-headphones"></i>
                             </span>
                             <span class="pcoded-mtext">Support</span>
                         </a>
-                    </li>
-                    <li data-username="Support Page" class="nav-item ">
+                    </li> -->
+                    <!-- <li data-username="Support Page" class="nav-item ">
                         <a target="_blank" href="https://appseed.us/admin-dashboards/django-dashboard-dattaable-pro" class="nav-link">
                             <span class="pcoded-micon">
                                 <i class="feather icon-tag"></i>
                             </span>
                            
                         </a>
-                    </li>                     
+                    </li>                      -->
                 </ul>
             </div>
         </div>

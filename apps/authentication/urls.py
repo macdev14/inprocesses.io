@@ -8,7 +8,7 @@ from .views import login_view, CompanySignUpView, EmployeeSignUpView, password_r
 from django.contrib.auth.views import LogoutView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetView
 
 # register_company, register_employee, 
-
+app_name='authentication'
 urlpatterns = [
     path('login/', login_view, name="login"),
     path('register/', CompanySignUpView.as_view(), name="register"),

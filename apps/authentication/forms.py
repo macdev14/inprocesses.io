@@ -39,39 +39,11 @@ class CompanySignUpForm(UserCreationForm):
     'onchange': 'cnpjlog(this);'} ) )
 
     name = forms.CharField(label='Razão Social', max_length=300, min_length=2, required=True, help_text='Required: First Name',
-                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Razão Social'}))
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'type':'text', 'placeholder': 'Razão Social'}))
     
   
 
-    # username = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             "placeholder": "Usuário",
-    #             "class": "form-control"
-    #         }
-    #     ))
-
-    # email = forms.EmailField(
-    #     widget=forms.EmailInput(
-    #         attrs={
-    #             "placeholder": "Email",
-    #             "class": "form-control"
-    #         }
-    #     ))
-    # password1 = forms.CharField(
-    #     widget=forms.PasswordInput(
-    #         attrs={
-    #             "placeholder": "Senha",
-    #             "class": "form-control"
-    #         }
-    #     ))
-    # password2 = forms.CharField(
-    #     widget=forms.PasswordInput(
-    #         attrs={
-    #             "placeholder": "Confirmar Senha",
-    #             "class": "form-control"
-    #         }
-    #     ))
+  
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -89,13 +61,50 @@ class CompanySignUpForm(UserCreationForm):
 
 class EmployeeSignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        #self.user = kwargs.pop('user')
+        self.company = kwargs.pop('company')
         super(EmployeeSignUpForm, self).__init__(*args, **kwargs)
 
     cpf = BRCPFField(label='CPF', widget=forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'CPF',
-    'id':'floatingInput cnpj',
+    'type':'text',
+    'id':'floatingInput cpf',
+    'oninput': 'formatcpf(this)',
     'onchange': 'cnpjlog(this);'
     } ))
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Usuário",
+                "class": "form-control",
+                'type':'text',
+            }
+        ))
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control",
+                'type':'email',
+            }
+        ))
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Senha",
+                "class": "form-control",
+                'type':'password',
+            }
+        ))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirmar Senha",
+                "class": "form-control",
+                'type':'password',
+            }
+        ))
 
 
     class Meta(UserCreationForm.Meta):
@@ -109,6 +118,6 @@ class EmployeeSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_employee= True
         user.save()
-        employee = Employee.objects.create(user=user, company=self.user, cpf=self.cleaned_data.get('cpf'))
+        employee = Employee.objects.create(user=user, company=self.company, cpf=self.cleaned_data.get('cpf'))
         #employee.cpf.add(*self.cleaned_data.get('cpf'))
         return user

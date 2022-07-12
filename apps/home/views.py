@@ -8,9 +8,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-
+from django.views.generic.list import ListView
 from twilio.rest import Client
+from apps.authentication.models import Employee
 from core.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+from django.template.defaulttags import register
+
+@register.filter
+def get_range(value):
+    if value:
+        return range(1, value)
+    return None
 
 @login_required(login_url="/login/")
 def index(request):
@@ -18,6 +26,10 @@ def index(request):
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
+
 
 
 @login_required(login_url="/login/")
