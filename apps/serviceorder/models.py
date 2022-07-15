@@ -11,13 +11,16 @@ from django.utils.timezone import now
 import datetime as datetime2
 from django.core.mail import send_mail
 
-from ..process.models import Process
+from apps.client.models import Client
+
+from apps.process.models import Process
 
 
 class ServiceOrder(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     #sub_os = models.ManyToOneRel(to=SubServiceOrder,on_delete=models.DO_NOTHING)
-    number =  models.IntegerField()
+    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
+    number =  models.IntegerField(default=1)
 
     def __str__(self):
         return self.number

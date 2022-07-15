@@ -14,4 +14,4 @@ class ProcessForm(forms.ModelForm):
     
     class Meta: 
         model = Process
-        fields = '__all__'
+        fields = ['name']

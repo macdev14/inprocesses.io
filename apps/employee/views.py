@@ -40,7 +40,7 @@ class ListEmployees(ListView, LoginRequiredMixin, UserPassesTestMixin ):
             self.company = company 
 
     def get_context_data(self, **kwargs):
-       
+        kwargs['segment'] = 'employee'
         print(self.request.user.is_company)
         return super().get_context_data(**kwargs)
     

@@ -49,13 +49,16 @@
                                 </div>
                             </div>
                         </div> -->
+                     
                     {% for employee in page_obj %}
 
                     <div class="col-md-6 col-xl-4">
 
                         <div class="card">
                             <div class="card-header">
-                                <h5>{{ employee.name }} </h5>
+                                <h4>Usuário: {{ employee.user }} </h5>
+                                <h5>Email: {{ employee.user.email }} </h5>
+                               
                             </div>
                             <div class="card-block">
                                 <p>

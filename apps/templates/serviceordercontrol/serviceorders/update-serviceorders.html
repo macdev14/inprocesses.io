@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 {% load widget_tweaks %}
-{% block title %} Page Blank {% endblock %} 
+{% block title %} Ordem de Serviço {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,7 +15,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Colaboradores</h5>
+                                <h5 class="m-b-10">Ordem de Serviço</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
@@ -31,6 +31,7 @@
                     <!-- [ Main Content ] start -->
                     <div class="row">
                         <div class="col-sm-12">
+                            <form action="{% url 'serviceorder:update' %}" method="post">
                             {% for field in form.visible_fields %}
 
                             <div class="input-group mb-4">
@@ -43,6 +44,7 @@
                       
                    
                             {% endfor %}
+                        </form>
                         </div>
                     </div>
                     <!-- [ Main Content ] end -->

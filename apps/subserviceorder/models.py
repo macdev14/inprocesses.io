@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.item.models import Item
+
 from ..authentication.models import Company
 from ..client.models import Client
 from ..serviceorder.models import ServiceOrder
@@ -9,8 +11,9 @@ from ..serviceorder.models import ServiceOrder
 class SubServiceOrder(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     main_os = models.ForeignKey(ServiceOrder, on_delete=models.CASCADE)
-    number = models.IntegerField()
-    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
+    quantity = models.IntegerField(default=1, editable=True)
+    number = models.IntegerField(default=1, editable=False)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     def save(self, *args, **kwargs):
         if self._state.adding:
             company = Company.objects.get(user=self.request.user)

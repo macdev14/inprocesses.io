@@ -3,11 +3,11 @@ from .views import CreateProcess, UpdateProcess, ListProcess
 app_name='process'
 urlpatterns = [
     # create views
-    path('add', CreateProcess.as_view() ,name='add-serviceorders'),
+    path('add', CreateProcess.as_view() ,name='add'),
     # update views
-    path('update', UpdateProcess.as_view() ,name='update-serviceorders'),
+    path('update', UpdateProcess.as_view() ,name='update'),
     # list views
-    path('', ListProcess.as_view() , name="list-processes"),
+    path('', ListProcess.as_view() , name="list"),
     
 
 ]

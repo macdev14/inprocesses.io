@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import CreateProcess, UpdateProcess, ListProcess
-app_name='process'
+from .views import CreateItem, UpdateItem, ListItem
+app_name='item'
 urlpatterns = [
     # create views
-    path('add', CreateProcess.as_view() ,name='add-serviceorders'),
+    path('add', CreateItem.as_view() ,name='add'),
     # update views
-    path('update', UpdateProcess.as_view() ,name='update-serviceorders'),
+    path('update', UpdateItem.as_view() ,name='update'),
     # list views
-    path('', ListProcess.as_view() , name="list-processes"),
+    path('', ListItem.as_view() , name="list"),
     
 
 ]

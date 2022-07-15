@@ -7,9 +7,16 @@ from apps.serviceorder.models import *
 # Create your views here.
 from apps.views_addons import CompanyAddonListView, CompanyAddonUpdateView, CompanyAddonCreateView
 
+
+
+
 class CreateServiceOrder(CompanyAddonCreateView):
     form_class = ServiceOrderForm
     template_name = 'serviceordercontrol/serviceorders/add-serviceorders.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['segment'] = 'serviceorder'
+        return super().get_context_data(**kwargs)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -18,7 +25,12 @@ class CreateServiceOrder(CompanyAddonCreateView):
 
 class UpdateServiceOrder(CompanyAddonUpdateView):
     form_class = ServiceOrderForm
-    
+    template_name = 'serviceordercontrol/serviceorders/update-serviceorders.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['segment'] = 'serviceorder'
+        return super().get_context_data(**kwargs)
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['request'] = self.request
@@ -35,7 +47,7 @@ class ListServiceOrders(CompanyAddonListView):
         return kwargs
 
     def get_context_data(self, **kwargs):
-        kwargs['segment'] = 'service-orders'
+        kwargs['segment'] = 'serviceorder'
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):

@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 {% load widget_tweaks %}
-{% block title %} Ordem de Serviço {% endblock %} 
+{% block title %} Sub Ordem de Serviços {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,11 +15,11 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Ordem de Serviço</h5>
+                                <h5 class="m-b-10">Colaboradores</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="javascript:">Ordem de Serviço</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Sub Ordem de Serviços</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,8 +31,8 @@
                     <!-- [ Main Content ] start -->
                     <div class="row">
                         <div class="col-sm-12">
-                      <form action="{% url 'serviceorder:add' %}" method="post">
-                    {% for field in form.visible_fields %}
+                            <form action="{% url 'subserviceorder:update' %}" method="post">
+                            {% for field in form.visible_fields %}
 
                             <div class="input-group mb-4">
                             
@@ -43,12 +43,9 @@
                                 {% endfor %}
                       
                    
-                    {% endfor %}
-                    <button type="submit btn btn-primary">Save</button>
+                            {% endfor %}
+                            <button type="submit btn btn-primary">Salvar</button>
                         </form>
-
-
-
                         </div>
                     </div>
                     <!-- [ Main Content ] end -->

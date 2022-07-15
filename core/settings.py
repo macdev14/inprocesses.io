@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.serviceorder',
     'apps.subserviceorder',
     'apps.process',
+    'apps.item',
     'apps.employee',
     'apps.client',
     'apps.inprocesses',

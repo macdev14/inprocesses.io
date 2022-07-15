@@ -180,7 +180,7 @@ class EmployeeSignUpView(CreateEmployeePermission, CreateView):
         kwargs['msg'] = self.msg
         kwargs['success'] = self.success
         kwargs['user'] = self.request.user
-        
+        kwargs['segment'] = 'employee'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):

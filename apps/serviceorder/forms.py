@@ -20,12 +20,13 @@ class ServiceOrderForm(CompanyAddonForm):
         self.fields['subserviceorders'] = forms.ModelMultipleChoiceField(label='Sub ordem de serviços',queryset=SubServiceOrder.objects.filter(main_os=None, company=self.company))
     class Meta: 
         model = ServiceOrder
-        fields = '__all__'
+        fields = ['number']
 
     def save(self, commit=True):
         instance = super(ServiceOrderForm, self).save(commit=False)
         for i in instance.subserviceorders:
             so = SubServiceOrder.objects.get(pk=i.id)
             so.mainos = instance
+            so.save()
 
 

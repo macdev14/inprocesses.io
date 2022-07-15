@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Processos{% endblock %} 
+{% block title %} Item {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,11 +15,11 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Processos</h5>
+                                <h5 class="m-b-10">Item</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="javascript:">Processos</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Item</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-md-6 col-xl-4">
 
-                            <a href="{% url 'process:add' %}"> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip" data-original-title="Adicionar Processo">Adicionar Processo</button></a>
+                            <a href="{% url 'item:add' %}"> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip" data-original-title="Adicionar Ordem de Serviço">Adicionar Item</button></a>
                        
                        </div>
                     </div>

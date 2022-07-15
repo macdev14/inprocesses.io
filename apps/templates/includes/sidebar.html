@@ -2,8 +2,8 @@
     <nav class="pcoded-navbar">
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo">
-                <a target="_blank" 
-                   href="https://appseed.us/admin-dashboards/django-dashboard-dattaable" class="b-brand">
+                <a
+                   href="{% url 'home:home' %}" class="b-brand">
                     <div class="b-bg">
                         <i class="feather icon-trending-up"></i>
                     </div>
@@ -24,18 +24,36 @@
                     </li>
                   
                     <li data-username="Employees" 
-                        class="nav-item {% if 'employees' in segment %} active {% endif %}">
-                        <a href="{%url 'employee:list-employees' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Colaboradores</span></a>
+                        class="nav-item {% if 'employee' in segment %} active {% endif %}">
+                        <a href="{%url 'employee:list' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Employees</span></a>
                     </li>
                     {% endif %}
                     
                     {% if user.is_employee or user.is_superuser %}
+
+                    
+
                     <li data-username="Employee dashboard" 
                         class="nav-item {% if 'employee-dashboard' in segment %} active {% endif %}">
                         <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Principal</span></a>
                     </li>
                     {% endif %}
+                    <!-- block both have permissions  -->
+                    <li data-username="Service-Orders" 
+                        class="nav-item {% if 'serviceorder' in segment %} active {% endif %}">
+                        <a href="{%url 'serviceorder:list' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Service Orders</span></a>
+                    </li>
 
+                    <li data-username="Sub-Service-Orders" 
+                        class="nav-item {% if 'sub-service-order' in segment %} active {% endif %}">
+                        <a href="{%url 'subserviceorder:list' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext"> Sub Service Orders</span></a>
+                    </li>
+
+                    <li data-username="items" 
+                        class="nav-item {% if 'item' in segment %} active {% endif %}">
+                        <a href="{%url 'item:list' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Item</span></a>
+                    </li>
+                    <!-- endblock both have permissions  -->
                     <li class="nav-item pcoded-menu-caption">
                         <label>UI Element</label>
                     </li>
