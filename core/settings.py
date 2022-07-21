@@ -29,8 +29,8 @@ DEBUG = env('DEBUG')
 ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
 
 # load production server from .env
-ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1', 'timesavr.herokuapp.com', 'inprocesses.io','inprocesses.com','inprocesses.com.br',             env('SERVER', default='127.0.0.1') ]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1','https://timesavr.herokuapp.com','https://inprocesses.io', 'https://inprocesses.com', 'https://inprocesses.com.br', 'https://' + env('SERVER', default='127.0.0.1') ]
+ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1', 'app.inprocesses.io' ,'timesavr.herokuapp.com', 'inprocesses.io','inprocesses.com','inprocesses.com.br',             env('SERVER', default='127.0.0.1') ]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1', 'https://app.inprocesses.io', 'https://timesavr.herokuapp.com','https://inprocesses.io', 'https://inprocesses.com', 'https://inprocesses.com.br', 'https://' + env('SERVER', default='127.0.0.1') ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = env('EMAIL_USE_TLS')
