@@ -1,5 +1,6 @@
 from django import forms
 from apps.serviceorder.forms import ServiceOrderForm
+from apps.subitem.models import SubItem
 
 from .models import Item
 #from apps.item.models import SubServiceOrder
@@ -14,8 +15,13 @@ class ItemForm(CompanyAddonForm):
         self.service_order_id = kwargs.pop('service_order_id','')
         self.get_company()
         super(ItemForm, self).__init__(*args, **kwargs)
-        # self.fields['serviceorders'] = forms.ModelChoiceField(queryset=ServiceOrder.objects.filter(main_os=self.service_order_id, company=self.company))
+        self.fields['subitem'] = forms.ModelMultipleChoiceField(queryset=SubItem.objects.filter(main_item=None, company=self.company))
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.company = self.company
+        instance.save()
 
     class Meta: 
         model = Item
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'quantity']

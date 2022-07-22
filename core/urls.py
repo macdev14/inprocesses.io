@@ -13,6 +13,7 @@ urlpatterns = [
     path("serviceorders/", include("apps.serviceorder.urls") , name="serviceorder"),
     path("subserviceorder/", include("apps.subserviceorder.urls") , name="subserviceorder"),
     path("item/", include("apps.item.urls") , name="item"),
+    path("subitem/", include("apps.subitem.urls") , name="subitem"),
     path("process/", include("apps.process.urls") , name="process"),
     path("employee/", include("apps.employee.urls"), name="employee" ),
     # Leave `Home.Urls` as last the last line

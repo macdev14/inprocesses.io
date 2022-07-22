@@ -5,7 +5,7 @@ urlpatterns = [
     # create views
     path('add', CreateItem.as_view() ,name='add'),
     # update views
-    path('update', UpdateItem.as_view() ,name='update'),
+    path('update/<int:pk>', UpdateItem.as_view() ,name='update'),
     # list views
     path('', ListItem.as_view() , name="list"),
     

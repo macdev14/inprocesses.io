@@ -5,7 +5,7 @@ urlpatterns = [
     # create views
     path('add', CreateProcess.as_view() ,name='add'),
     # update views
-    path('update', UpdateProcess.as_view() ,name='update'),
+    path('update/<int:pk>', UpdateProcess.as_view() ,name='update'),
     # list views
     path('', ListProcess.as_view() , name="list"),
     

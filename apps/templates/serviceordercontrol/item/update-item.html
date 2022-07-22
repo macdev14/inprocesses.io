@@ -31,7 +31,7 @@
                     <!-- [ Main Content ] start -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <form action="{% url 'item:update' %}" method="post">
+                            <form action="{% url 'item:update' pk=object.id %}" method="post">
                                 {% csrf_token %}  
                             {% for field in form.visible_fields %}
 

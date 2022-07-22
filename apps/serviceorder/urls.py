@@ -6,7 +6,7 @@ urlpatterns = [
     # create views
     path('add', CreateServiceOrder.as_view() ,name='add'),
     # update views
-    path('update', UpdateServiceOrder.as_view() ,name='update'),
+    path('update/<int:pk>', UpdateServiceOrder.as_view() ,name='update'),
     # list views
     #path('processes', ListProcesses.as_view() , name="list-processes"),
     path('', ListServiceOrders.as_view() ,name='list'),

@@ -21,7 +21,7 @@ class SubServiceOrderForm(CompanyAddonForm):
         super(SubServiceOrderForm, self).__init__(*args, **kwargs)
         print(self.fields)
         self.fields['main_os'] = forms.ModelChoiceField( empty_label='Selecione uma Ordem de Serviço Matriz', label='Ordem de Serviços', queryset=ServiceOrder.objects.filter(company=self.company))
-        self.fields['item'] = forms.ModelChoiceField( empty_label='Selecione um Item', label='Item', queryset=Item.objects.filter(company=self.company))
+        self.fields['subitem'] = forms.ModelChoiceField( empty_label='Selecione um Item', label='Item', queryset=Item.objects.filter(company=self.company))
     class Meta: 
         model = SubServiceOrder
-        fields = ['main_os', 'item', 'quantity']
+        fields = ['main_os', 'subitem', 'quantity']

@@ -31,11 +31,11 @@
                     <!-- [ Main Content ] start -->
                     <div class="row">
                         <div class="col-sm-12">
-                      <form action="{% url 'serviceorder:add' %}" method="post">
-                    {% for field in form.visible_fields %}
+                     <form action="{% url 'serviceorder:add' %}" method="post">
+                            {% for field in form.visible_fields %}
 
                             <div class="input-group mb-4">
-                            
+                               
                             {% render_field field class="form-control" placeholder=field.label %}
                             </div>
                                 {% for error in field.errors %}
@@ -44,6 +44,7 @@
                       
                    
                     {% endfor %}
+
                     <button type="submit btn btn-primary">Save</button>
                         </form>
 

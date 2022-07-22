@@ -49,19 +49,22 @@
                                 </div>
                             </div>
                         </div> -->
-                    {% for employee in page_obj %}
+                     
+                    {% for object in page_obj %}
 
                     <div class="col-md-6 col-xl-4">
-
+                        <a href="{% url 'item:update' pk=object.id %}">
                         <div class="card">
                             <div class="card-header">
-                                <h5>{{ employee.name }} </h5>
+                                <h5>{{ object }} </h5>
                             </div>
                             <div class="card-block">
                                 <p>
+                                    <h5>{{ object.description }} </h5>
                                 </p>
                             </div>
                         </div>
+                    </a>
                     </div>
 
                     {% endfor %}
