@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 from apps.authentication.models import Company
-from apps.subitem.models import SubItem
+# from apps.subitem.models import SubItem
 
 # Create your models here.
 
